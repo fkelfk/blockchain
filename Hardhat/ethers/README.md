@@ -31,3 +31,12 @@
     ```bash
     yarn add fa-extra
     ```
+
+- dotenv 설치
+    ```bash
+    yarn add dotenv
+    ```
+-  prettier-plugin-solidity 설치
+    ```bash
+    yarn add prettier prettier-plugin-solidity  
+    ```
