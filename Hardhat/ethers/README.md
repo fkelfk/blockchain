@@ -41,3 +41,10 @@
     yarn add prettier prettier-plugin-solidity  
     ```
 
+-  type이용시
+    ```bash
+    yarn add typescript ts-node
+    yarn add @types/fs-extra
+    yarn ts-node deploy.ts 
+    ```
+
