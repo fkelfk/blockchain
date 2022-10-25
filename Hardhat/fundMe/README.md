@@ -28,11 +28,7 @@
     yarn add --dev hardhat-deploy
     ```
     
-    hardhat.config.js
-    add require("hardhat-deploy")
-    delete scripts/deploy.js
-    mkdir deploy
-
+- install hardhat-deploy
     ```bash
     yarn add --dev @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers
     ```
