@@ -1,5 +1,6 @@
 const { networkConfig, developmentChains } = require("../helper-hardhat-config")
 const { network } = require("hardhat")
+const { verify } = require("../utils/verify")
 
 module.exports = async ({ getNamedAccounts, deployment }) => {
     const { deploy, log } = deployments
@@ -19,7 +20,15 @@ module.exports = async ({ getNamedAccounts, deployment }) => {
         from: deployer,
         args: [ethUsdPriceFeedAddresss],
         log: true,
+        waitConfirmation: network.config.blockConfirmation || 1,
     })
+
+    if (
+        !developmentChains.includes(network.name) &&
+        process.env.ETHERSCAN_API
+    ) {
+    }
+    log("----------------")
 }
 
 module.exports.tags = ["all", "fundme"]
