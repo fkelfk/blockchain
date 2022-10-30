@@ -1,32 +1,35 @@
 const { networkConfig, developmentChains } = require("../helper-hardhat-config")
 const { network } = require("hardhat")
 const { verify } = require("../utils/verify")
+require("dotenv").config()
 
-module.exports = async ({ getNamedAccounts, deployment }) => {
+module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
     const chainId = network.config.chainId
 
     // const ethUsdPriceFeedAddress = networkConfig[chianId]["etherUsdPriceFeed"]
-    let ethUsdPriceFeedAddresss
+    let ethUsdPriceFeedAddress
     if (developmentChains.includes(network.name)) {
         const ethUsdAggregator = await deployments.get("MockV3Aggregator")
-        ethUsdPriceFeedAddresss = ethUsdAggregator.address
+        ethUsdPriceFeedAddress = ethUsdAggregator.address
     } else {
-        ethUsdPriceFeedAddresss = networkConfig[chainId]["ethUsdPriceFeed"]
+        ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
     }
+
 
     const fundMe = await deploy("FundMe", {
         from: deployer,
-        args: [ethUsdPriceFeedAddresss],
+        args: [ethUsdPriceFeedAddress],
         log: true,
         waitConfirmation: network.config.blockConfirmation || 1,
     })
 
     if (
         !developmentChains.includes(network.name) &&
-        process.env.ETHERSCAN_API
+        process.env.ETHERSCAN_API_KEY
     ) {
+        await verify(fundMe.address, [ethUsdPriceFeedAddress])
     }
     log("----------------")
 }

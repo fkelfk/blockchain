@@ -10,7 +10,7 @@
     yarn hardhat
     ```
 
-    select "Create a JavaScript project
+    select "Create a JavaScript project"
 
 - install solhint
     ```bash
@@ -31,4 +31,9 @@
 - install hardhat-deploy
     ```bash
     yarn add --dev @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers
+    ```
+
+- install dotenv
+    ```bash
+    yarn add dotenv
     ```
